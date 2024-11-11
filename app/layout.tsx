@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import ConvexProvider from "@/components/providers/convex-provider";
+import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -36,17 +38,18 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <ConvexProvider>
-                    <ThemeProvider
-                        attribute="class"
-                        defaultTheme="system"
-                        enableSystem
-                        disableTransitionOnChange
-                        storageKey="notion-theme"
-                    >
-                        {children}
-                    </ThemeProvider>
-                </ConvexProvider>
+                    <ConvexProvider>
+                        <ThemeProvider
+                            attribute="class"
+                            defaultTheme="system"
+                            enableSystem
+                            disableTransitionOnChange
+                            storageKey="notion-theme"
+                        >
+                            <Toaster position="bottom-center" />
+                            {children}
+                        </ThemeProvider>
+                    </ConvexProvider>
             </body>
 		</html>
 	);
